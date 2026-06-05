@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{nome_empresa}} — Local Hero</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand:       {{cor_primaria}};
+      --brand-dark:  {{cor_primaria_dark}};
+      --brand-pale:  {{cor_primaria_pale}};
+      --ink:         #1a1a2e;
+      --white:       #ffffff;
+      --gray-100:    #f4f4f8;
+      --gray-200:    #e8e8f0;
+      --gray-500:    #7a7a96;
+      --font:        'Nunito', sans-serif;
+
+      /* fallback caso variáveis de cor não sejam injetadas */
+      --brand:       #f97316;
+      --brand-dark:  #ea6a0a;
+      --brand-pale:  #fff7ed;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--white); color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+    /* ── Status bar ───────────────────── */
+    .status-bar {
+      background: var(--brand);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fff;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+
+    .status-bar__text {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* ── Nav ──────────────────────────── */
+    .nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .nav__name {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .nav__phone {
+      background: var(--brand-pale);
+      color: var(--brand-dark);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ── Hero ─────────────────────────── */
+    .hero {
+      background: var(--brand-pale);
+      padding: 48px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__blob {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--brand);
+      opacity: .06;
+    }
+    .hero__blob--1 { width: 200px; height: 200px; top: -80px; right: -60px; }
+    .hero__blob--2 { width: 140px; height: 140px; bottom: -50px; left: -40px; }
+
+    .hero__category {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--brand);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    .hero__title {
+      font-size: clamp(32px, 9vw, 52px);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .hero__location {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-500);
+      margin-bottom: 24px;
+    }
+
+    .hero__rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .hero__stars { color: #f59e0b; font-size: 18px; letter-spacing: 2px; }
+
+    .hero__rating-text { font-size: 13px; font-weight: 700; color: var(--ink); }
+
+    .hero__rating-count { font-size: 12px; color: var(--gray-500); }
+
+    .hero__cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brand);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 16px 32px;
+      border-radius: 14px;
+      margin-bottom: 10px;
+      transition: all .2s;
+      width: 100%;
+      justify-content: center;
+      max-width: 320px;
+    }
+    .hero__cta-primary:hover { background: var(--brand-dark); transform: translateY(-2px); }
+
+    .hero__cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--white);
+      color: var(--brand-dark);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 14px;
+      border: 2px solid var(--brand);
+      transition: all .2s;
+      width: 100%;
+      max-width: 320px;
+    }
+    .hero__cta-secondary:hover { background: var(--brand-pale); }
+
+    .hero__ctas { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+
+    /* ── Serviços ─────────────────────── */
+    .section { padding: 56px 24px; }
+    .section--alt { background: var(--gray-100); }
+
+    .section__header { text-align: center; margin-bottom: 28px; }
+
+    .section__tag {
+      display: inline-block;
+      background: var(--brand);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .section__title {
+      font-size: clamp(24px, 7vw, 36px);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .service-tile {
+      background: var(--white);
+      border: 2px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 20px 16px;
+      text-align: center;
+      transition: all .2s;
+    }
+    .service-tile:hover { border-color: var(--brand); transform: translateY(-2px); }
+
+    .service-tile__icon { font-size: 28px; margin-bottom: 8px; }
+    .service-tile__name { font-size: 13px; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
+    .service-tile__price { font-size: 14px; font-weight: 700; color: var(--brand); }
+
+    .service-tile--featured {
+      grid-column: 1 / -1;
+      background: var(--brand);
+      border-color: var(--brand);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      padding: 20px;
+    }
+
+    .service-tile--featured .service-tile__name { color: #fff; font-size: 15px; }
+    .service-tile--featured .service-tile__price { color: rgba(255,255,255,.8); }
+    .service-tile--featured .service-tile__badge {
+      background: rgba(255,255,255,.2);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
+    /* ── Info práticas ────────────────── */
+    .info-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .info-card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .info-card__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--brand-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .info-card__label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--gray-500);
+      margin-bottom: 3px;
+    }
+
+    .info-card__value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .info-card__detail { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+
+    /* ── Reviews ──────────────────────── */
+    .review-banner {
+      background: var(--brand);
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .review-banner__stars { font-size: 24px; color: #fff; letter-spacing: 3px; margin-bottom: 4px; }
+    .review-banner__score { font-size: 40px; font-weight: 900; color: #fff; line-height: 1; }
+    .review-banner__total { font-size: 13px; color: rgba(255,255,255,.7); margin-top: 4px; }
+
+    .review-list {
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .review-item {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .review-item__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .review-item__name { font-size: 13px; font-weight: 800; color: var(--ink); }
+    .review-item__stars { font-size: 12px; color: #f59e0b; }
+    .review-item__text { font-size: 13px; color: var(--gray-500); line-height: 1.5; }
+
+    /* ── CTA Flutuante ────────────────── */
+    .cta-float {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      width: calc(100% - 48px);
+      max-width: 360px;
+    }
+
+    .cta-float__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--brand);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 18px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2);
+      transition: all .2s;
+      width: 100%;
+    }
+    .cta-float__btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+
+    /* ── Footer ───────────────────────── */
+    .footer {
+      background: var(--ink);
+      padding: 32px 24px 100px;
+      text-align: center;
+    }
+
+    .footer__brand { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+    .footer__addr { font-size: 12px; color: rgba(255,255,255,.4); margin-bottom: 16px; }
+
+    .footer__social { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; }
+    .footer__social a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: background .2s;
+    }
+    .footer__social a:hover { background: var(--brand); }
+
+    .footer__copy { font-size: 10px; color: rgba(255,255,255,.15); }
+  </style>
+</head>
+<body>
+
+  <!-- STATUS BAR -->
+  <div class="status-bar">
+    <div class="status-dot"></div>
+    <span class="status-bar__text">{{status_aberto}} · {{horario_hoje}}</span>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav__brand">
+      <div class="nav__icon">{{emoji_negocio}}</div>
+      <div class="nav__name">{{nome_empresa}}</div>
+    </div>
+    <a href="tel:{{telefone}}" class="nav__phone">📞 Ligar</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__blob hero__blob--1"></div>
+    <div class="hero__blob hero__blob--2"></div>
+    <div class="hero__category">{{categoria_negocio}}</div>
+    <h1 class="hero__title">{{nome_empresa}}</h1>
+    <div class="hero__location">📍 {{bairro}}, {{cidade_estado}}</div>
+    <div class="hero__rating">
+      <div class="hero__stars">★★★★★</div>
+      <div class="hero__rating-text">{{nota_media}}</div>
+      <div class="hero__rating-count">({{total_avaliacoes}} avaliações)</div>
+    </div>
+    <div class="hero__ctas">
+      <a href="{{whatsapp_link}}" class="hero__cta-primary">💬 Falar no WhatsApp</a>
+      <a href="tel:{{telefone}}" class="hero__cta-secondary">📞 {{telefone_formatado}}</a>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="section">
+    <div class="section__header">
+      <span class="section__tag">Serviços</span>
+      <h2 class="section__title">{{titulo_servicos}}</h2>
+    </div>
+    <div class="service-grid">
+      <div class="service-tile service-tile--featured">
+        <div>
+          <div class="service-tile__name">{{servico_destaque}}</div>
+          <div class="service-tile__price">{{preco_destaque}}</div>
+        </div>
+        <span class="service-tile__badge">⭐ Mais pedido</span>
+      </div>
+      <div class="service-tile">
+        <div class="service-tile__icon">{{icone_1}}</div>
+        <div class="service-tile__name">{{servico_1}}</div>
+        <div class="service-tile__price">{{preco_1}}</div>
+      </div>
+      <div class="service-tile">
+        <div class="service-tile__icon">{{icone_2}}</div>
+        <div class="service-tile__name">{{servico_2}}</div>
+        <div class="service-tile__price">{{preco_2}}</div>
+      </div>
+      <div class="service-tile">
+        <div class="service-tile__icon">{{icone_3}}</div>
+        <div class="service-tile__name">{{servico_3}}</div>
+        <div class="service-tile__price">{{preco_3}}</div>
+      </div>
+      <div class="service-tile">
+        <div class="service-tile__icon">{{icone_4}}</div>
+        <div class="service-tile__name">{{servico_4}}</div>
+        <div class="service-tile__price">{{preco_4}}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFORMAÇÕES PRÁTICAS -->
+  <section class="section section--alt">
+    <div class="section__header">
+      <span class="section__tag">Informações</span>
+      <h2 class="section__title">Como nos encontrar</h2>
+    </div>
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-card__icon">🕐</div>
+        <div>
+          <div class="info-card__label">Horário</div>
+          <div class="info-card__value">{{horario_semana}}</div>
+          <div class="info-card__detail">{{horario_fim_semana}}</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__icon">📍</div>
+        <div>
+          <div class="info-card__label">Endereço</div>
+          <div class="info-card__value">{{endereco}}</div>
+          <div class="info-card__detail">{{bairro}} · {{cidade_estado}}</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__icon">💳</div>
+        <div>
+          <div class="info-card__label">Pagamento</div>
+          <div class="info-card__value">{{formas_pagamento}}</div>
+          <div class="info-card__detail">{{info_pagamento}}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVALIAÇÕES -->
+  <div class="review-banner">
+    <div class="review-banner__stars">★★★★★</div>
+    <div class="review-banner__score">{{nota_media}}</div>
+    <div class="review-banner__total">Baseado em {{total_avaliacoes}} avaliações</div>
+  </div>
+  <div class="review-list">
+    <div class="review-item">
+      <div class="review-item__header">
+        <div class="review-item__name">{{reviewer_1}}</div>
+        <div class="review-item__stars">★★★★★</div>
+      </div>
+      <p class="review-item__text">"{{review_1}}"</p>
+    </div>
+    <div class="review-item">
+      <div class="review-item__header">
+        <div class="review-item__name">{{reviewer_2}}</div>
+        <div class="review-item__stars">★★★★★</div>
+      </div>
+      <p class="review-item__text">"{{review_2}}"</p>
+    </div>
+    <div class="review-item">
+      <div class="review-item__header">
+        <div class="review-item__name">{{reviewer_3}}</div>
+        <div class="review-item__stars">★★★★★</div>
+      </div>
+      <p class="review-item__text">"{{review_3}}"</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__brand">{{nome_empresa}}</div>
+    <div class="footer__addr">{{endereco}} · {{bairro}}</div>
+    <div class="footer__social">
+      <a href="{{instagram_link}}">📸</a>
+      <a href="{{whatsapp_link}}">💬</a>
+      <a href="{{maps_link}}">🗺️</a>
+    </div>
+    <p class="footer__copy">{{cidade_estado}} · {{ano}}</p>
+  </footer>
+
+  <!-- CTA FLUTUANTE -->
+  <div class="cta-float">
+    <a href="{{whatsapp_link}}" class="cta-float__btn">
+      💬 {{cta_flutuante}}
+    </a>
+  </div>
+
+</body>
+</html>
