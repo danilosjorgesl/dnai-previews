@@ -1,6 +1,17 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "updated": "2026-06-05",
+  "variaveis_padronizadas": [
+    "nome_empresa",
+    "segmento",
+    "dor_principal",
+    "produto_indicado",
+    "cta_whatsapp",
+    "cidade",
+    "servico_1",
+    "servico_2",
+    "servico_3"
+  ],
   "templates": [
     {
       "id": "beauty_luxury",
@@ -10,11 +21,10 @@
       "tom": "sofisticado, exclusivo, sensorial",
       "status": "active",
       "path": "templates/beauty_luxury/index.html",
-      "variaveis": [
-        "nome_empresa", "tagline", "servico_1..4", "detalhe_1..4", "preco_1..4",
+      "variaveis_proprias": [
+        "servico_1..4", "detalhe_1..4", "preco_1..4",
         "diferencial_1..4", "depoimento_texto", "depoimento_autora",
-        "cta_titulo", "cta_subtitulo", "whatsapp_link", "instagram_link",
-        "endereco", "cidade_estado"
+        "cta_titulo", "instagram_link", "endereco"
       ]
     },
     {
@@ -25,13 +35,12 @@
       "tom": "moderno, acolhedor, vibrante",
       "status": "active",
       "path": "templates/beauty_studio/index.html",
-      "variaveis": [
-        "nome_empresa", "cidade_estado", "headline_1", "headline_2", "subtitulo",
+      "variaveis_proprias": [
+        "headline_1", "headline_2",
         "numero_1..3", "label_numero_1..3", "titulo_servicos",
-        "icone_1..3", "servico_1..3", "detalhe_1..3", "preco_1..3",
+        "icone_1..3", "detalhe_1..3", "preco_1..3",
         "depoimento_1..2", "inicial_1..2", "autora_1..2", "data_1..2",
-        "cta_titulo", "cta_sub", "whatsapp_link", "instagram_link",
-        "endereco", "cidade_estado"
+        "cta_titulo", "instagram_link", "endereco"
       ]
     },
     {
@@ -42,14 +51,13 @@
       "tom": "autoridade, confiança, resultados",
       "status": "active",
       "path": "templates/authority/index.html",
-      "variaveis": [
-        "nome_empresa", "especialidade_principal", "headline_1", "headline_2",
-        "descricao_hero", "cta_primario", "credencial_1..3",
-        "titulo_expertise", "area_1..3", "desc_area_1..3",
-        "stat_1..4", "label_stat_1..4", "titulo_processo",
-        "passo_1..3", "desc_passo_1..3", "depoimento", "depoimento_autor", "depoimento_cargo",
-        "cta_titulo", "cta_sub", "cta_btn", "contato_link",
-        "linkedin_link", "instagram_link", "cidade_estado", "segmento"
+      "variaveis_proprias": [
+        "headline_1", "headline_2", "cta_primario",
+        "credencial_1..3", "titulo_expertise",
+        "desc_area_1..3", "stat_1..4", "label_stat_1..4",
+        "titulo_processo", "passo_1..3", "desc_passo_1..3",
+        "depoimento", "depoimento_autor", "depoimento_cargo",
+        "cta_titulo", "cta_btn", "contato_link", "linkedin_link", "instagram_link"
       ]
     },
     {
@@ -60,16 +68,15 @@
       "tom": "profissional, orientado a resultados, escalável",
       "status": "active",
       "path": "templates/business_pro/index.html",
-      "variaveis": [
-        "nome_empresa", "inicial_logo", "segmento", "topbar_mensagem", "topbar_destaque",
-        "headline_1", "headline_2", "descricao_hero", "cta_primario",
-        "beneficio_1..3", "titulo_solucoes", "sub_solucoes",
-        "icone_1..3", "solucao_1..3", "desc_solucao_1..3",
+      "variaveis_proprias": [
+        "inicial_logo", "topbar_mensagem", "topbar_destaque",
+        "headline_1", "headline_2", "cta_primario",
+        "beneficio_1..3", "titulo_solucoes",
+        "icone_1..3", "desc_solucao_1..3",
         "kpi_1..4", "label_kpi_1..4",
         "depoimento_1..2", "inicial_1..2", "autor_1..2", "cargo_1..2",
-        "cta_titulo", "cta_sub", "cta_btn", "contato_link",
-        "linkedin_link", "instagram_link", "whatsapp_link",
-        "cnpj", "cidade_estado"
+        "cta_titulo", "cta_btn", "contato_link",
+        "linkedin_link", "instagram_link", "cnpj"
       ]
     },
     {
@@ -80,14 +87,12 @@
       "tom": "direto, amigável, local",
       "status": "active",
       "path": "templates/local_hero/index.html",
-      "variaveis": [
-        "nome_empresa", "emoji_negocio", "categoria_negocio",
-        "cor_primaria", "cor_primaria_dark", "cor_primaria_pale",
+      "variaveis_proprias": [
+        "emoji_negocio", "cor_primaria", "cor_primaria_dark", "cor_primaria_pale",
         "status_aberto", "horario_hoje", "telefone", "telefone_formatado",
-        "bairro", "cidade_estado", "nota_media", "total_avaliacoes",
-        "whatsapp_link", "titulo_servicos",
-        "servico_destaque", "preco_destaque",
-        "icone_1..4", "servico_1..4", "preco_1..4",
+        "bairro", "nota_media", "total_avaliacoes",
+        "titulo_servicos", "servico_destaque", "preco_destaque",
+        "icone_1..4", "preco_1..4",
         "horario_semana", "horario_fim_semana", "endereco",
         "formas_pagamento", "info_pagamento",
         "reviewer_1..3", "review_1..3",

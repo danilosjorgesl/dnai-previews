@@ -1,537 +1,123 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{nome_empresa}} — Authority</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ink:         #0a0a0a;
-      --ink-mid:     #111;
-      --accent:      #2563eb;
-      --accent-pale: #eff6ff;
-      --white:       #ffffff;
-      --gray-1:      #f8f8f8;
-      --gray-2:      #e8e8e8;
-      --gray-text:   #6b6b6b;
-      --font-display:'Syne', sans-serif;
-      --font-body:   'Inter', sans-serif;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font-body); background: var(--white); color: var(--ink); -webkit-font-smoothing: antialiased; }
-
-    /* ── Header ───────────────────────── */
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--white);
-      border-bottom: 1px solid var(--gray-2);
-      padding: 0 24px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .header__logo {
-      font-family: var(--font-display);
-      font-size: 17px;
-      font-weight: 700;
-      letter-spacing: -.02em;
-      color: var(--ink);
-    }
-
-    .header__logo span { color: var(--accent); }
-
-    .header__btn {
-      background: var(--accent);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 500;
-      padding: 9px 18px;
-      border-radius: 6px;
-      transition: opacity .2s;
-    }
-    .header__btn:hover { opacity: .85; }
-
-    /* ── Hero ─────────────────────────── */
-    .hero {
-      padding: 56px 24px 64px;
-      background: var(--ink);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero__grid {
-      position: absolute;
-      inset: 0;
-      opacity: .04;
-      background-image:
-        linear-gradient(var(--white) 1px, transparent 1px),
-        linear-gradient(90deg, var(--white) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-
-    .hero__badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(37,99,235,.2);
-      border: 1px solid rgba(37,99,235,.4);
-      color: #93c5fd;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .06em;
-      padding: 5px 12px;
-      border-radius: 999px;
-      margin-bottom: 24px;
-      position: relative;
-    }
-
-    .hero__title {
-      font-family: var(--font-display);
-      font-size: clamp(36px, 10vw, 64px);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.0;
-      letter-spacing: -.03em;
-      margin-bottom: 20px;
-      position: relative;
-    }
-
-    .hero__title .highlight {
-      color: var(--accent);
-      position: relative;
-      display: inline-block;
-    }
-
-    .hero__desc {
-      font-size: 15px;
-      font-weight: 300;
-      color: rgba(255,255,255,.55);
-      line-height: 1.7;
-      max-width: 340px;
-      margin-bottom: 36px;
-      position: relative;
-    }
-
-    .hero__actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      position: relative;
-    }
-
-    .btn-accent {
-      background: var(--accent);
-      color: #fff;
-      padding: 14px 24px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all .2s;
-    }
-    .btn-accent:hover { background: #1d4ed8; }
-
-    .btn-outline-white {
-      background: transparent;
-      color: rgba(255,255,255,.7);
-      border: 1px solid rgba(255,255,255,.15);
-      padding: 14px 24px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      transition: all .2s;
-    }
-    .btn-outline-white:hover { border-color: rgba(255,255,255,.4); color: #fff; }
-
-    /* ── Logos/Credenciais ────────────── */
-    .credenciais {
-      background: var(--gray-1);
-      padding: 28px 24px;
-      border-bottom: 1px solid var(--gray-2);
-    }
-
-    .credenciais__label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--gray-text);
-      text-align: center;
-      margin-bottom: 16px;
-    }
-
-    .credenciais__list {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .credencial-item {
-      background: var(--white);
-      border: 1px solid var(--gray-2);
-      border-radius: 8px;
-      padding: 8px 16px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--gray-text);
-      letter-spacing: .04em;
-    }
-
-    /* ── Especialidades ───────────────── */
-    .section { padding: 64px 24px; }
-    .section--gray { background: var(--gray-1); }
-
-    .section__label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-
-    .section__title {
-      font-family: var(--font-display);
-      font-size: clamp(26px, 7vw, 40px);
-      font-weight: 700;
-      letter-spacing: -.02em;
-      color: var(--ink);
-      line-height: 1.1;
-      margin-bottom: 36px;
-    }
-
-    .expertise-list {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .expertise-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 20px;
-      background: var(--white);
-      border: 1px solid var(--gray-2);
-      border-radius: 10px;
-      transition: border-color .2s, box-shadow .2s;
-    }
-    .expertise-item:hover { border-color: var(--accent); box-shadow: 0 2px 12px rgba(37,99,235,.08); }
-
-    .expertise-item__num {
-      font-family: var(--font-display);
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--accent);
-      min-width: 28px;
-      margin-top: 2px;
-    }
-
-    .expertise-item__title {
-      font-family: var(--font-display);
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 4px;
-    }
-
-    .expertise-item__desc {
-      font-size: 13px;
-      color: var(--gray-text);
-      line-height: 1.6;
-    }
-
-    /* ── Stats ────────────────────────── */
-    .stats-block {
-      background: var(--accent);
-      padding: 40px 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .stat-item { text-align: center; }
-
-    .stat-item__num {
-      font-family: var(--font-display);
-      font-size: 40px;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .stat-item__label {
-      font-size: 11px;
-      font-weight: 500;
-      color: rgba(255,255,255,.65);
-      line-height: 1.3;
-    }
-
-    /* ── Processo ─────────────────────── */
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      position: relative;
-    }
-
-    .steps::before {
-      content: '';
-      position: absolute;
-      left: 20px;
-      top: 24px;
-      bottom: 24px;
-      width: 1px;
-      background: var(--gray-2);
-    }
-
-    .step {
-      display: flex;
-      gap: 20px;
-      padding: 20px 0;
-      position: relative;
-    }
-
-    .step__dot {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--accent-pale);
-      border: 2px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--accent);
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-      background: var(--white);
-    }
-
-    .step__title {
-      font-family: var(--font-display);
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 4px;
-      margin-top: 10px;
-    }
-
-    .step__desc { font-size: 13px; color: var(--gray-text); line-height: 1.6; }
-
-    /* ── Depoimento ───────────────────── */
-    .quote-block {
-      background: var(--ink);
-      padding: 56px 24px;
-      text-align: center;
-    }
-
-    .quote-block__text {
-      font-family: var(--font-display);
-      font-size: clamp(20px, 5vw, 30px);
-      font-weight: 500;
-      color: #fff;
-      line-height: 1.4;
-      max-width: 360px;
-      margin: 0 auto 20px;
-    }
-
-    .quote-block__author { font-size: 12px; color: rgba(255,255,255,.35); letter-spacing: .08em; }
-    .quote-block__role { font-size: 11px; color: var(--accent); margin-top: 2px; }
-
-    /* ── CTA ──────────────────────────── */
-    .cta-section {
-      padding: 64px 24px;
-      text-align: center;
-      border-top: 1px solid var(--gray-2);
-    }
-
-    .cta-section__title {
-      font-family: var(--font-display);
-      font-size: clamp(26px, 7vw, 40px);
-      font-weight: 700;
-      letter-spacing: -.02em;
-      color: var(--ink);
-      margin-bottom: 12px;
-    }
-
-    .cta-section__sub { font-size: 14px; color: var(--gray-text); margin-bottom: 28px; }
-
-    /* ── Footer ───────────────────────── */
-    .footer {
-      background: var(--ink);
-      padding: 32px 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .footer__brand {
-      font-family: var(--font-display);
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .footer__links { display: flex; gap: 20px; }
-    .footer__links a { font-size: 11px; color: rgba(255,255,255,.3); letter-spacing: .06em; text-transform: uppercase; }
-    .footer__links a:hover { color: var(--accent); }
-
-    .footer__copy { font-size: 10px; color: rgba(255,255,255,.15); }
-  </style>
-</head>
-<body>
-
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header__logo">{{nome_empresa}}<span>.</span></div>
-    <a href="{{contato_link}}" class="header__btn">Falar comigo</a>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero__grid"></div>
-    <div class="hero__badge">⚡ {{especialidade_principal}}</div>
-    <h1 class="hero__title">
-      {{headline_1}}<br>
-      <span class="highlight">{{headline_2}}</span>
-    </h1>
-    <p class="hero__desc">{{descricao_hero}}</p>
-    <div class="hero__actions">
-      <a href="{{contato_link}}" class="btn-accent">{{cta_primario}} →</a>
-      <a href="#expertise" class="btn-outline-white">Ver resultados</a>
-    </div>
-  </section>
-
-  <!-- CREDENCIAIS -->
-  <div class="credenciais">
-    <p class="credenciais__label">Reconhecido por</p>
-    <div class="credenciais__list">
-      <div class="credencial-item">{{credencial_1}}</div>
-      <div class="credencial-item">{{credencial_2}}</div>
-      <div class="credencial-item">{{credencial_3}}</div>
-    </div>
-  </div>
-
-  <!-- ESPECIALIDADES -->
-  <section id="expertise" class="section">
-    <p class="section__label">Especialidades</p>
-    <h2 class="section__title">{{titulo_expertise}}</h2>
-    <div class="expertise-list">
-      <div class="expertise-item">
-        <div class="expertise-item__num">01</div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dra. Camila Odontologia</title>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="phone">
+      <header class="topbar">
         <div>
-          <div class="expertise-item__title">{{area_1}}</div>
-          <div class="expertise-item__desc">{{desc_area_1}}</div>
+          <span>Dra. Camila</span>
+          <small>Odontologia estética</small>
         </div>
-      </div>
-      <div class="expertise-item">
-        <div class="expertise-item__num">02</div>
+        <a href="https://wa.me/5511999999999">WhatsApp</a>
+      </header>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-card">
+          <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=900&q=80" alt="Dentista em consultório odontológico moderno">
+          <div class="credential">
+            <strong>CRO ativo</strong>
+            <span>Atendimento humanizado</span>
+          </div>
+        </div>
+        <p class="eyebrow">Sorrisos com segurança clínica</p>
+        <h1 id="hero-title">Odontologia estética com plano claro do início ao fim.</h1>
+        <p class="intro">Avaliação cuidadosa, tecnologia digital e orientação transparente para transformar seu sorriso com confiança.</p>
+        <a class="primary" href="https://wa.me/5511999999999">Agendar avaliação no WhatsApp</a>
+      </section>
+
+      <section class="trust about" aria-label="Sobre">
         <div>
-          <div class="expertise-item__title">{{area_2}}</div>
-          <div class="expertise-item__desc">{{desc_area_2}}</div>
+          <strong>Consulta premium</strong>
+          <p>Anamnese completa, fotos clínicas, escaneamento e plano apresentado em linguagem simples.</p>
         </div>
-      </div>
-      <div class="expertise-item">
-        <div class="expertise-item__num">03</div>
-        <div>
-          <div class="expertise-item__title">{{area_3}}</div>
-          <div class="expertise-item__desc">{{desc_area_3}}</div>
+        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=700&q=80" alt="Consultório odontológico claro e moderno">
+      </section>
+
+      
+
+      <section class="services" aria-labelledby="services-title">
+        <div class="section-heading">
+          <p class="eyebrow">Serviços</p>
+          <h2 id="services-title">Tratamentos para sorrir melhor.</h2>
         </div>
-      </div>
-    </div>
-  </section>
+        <article>
+          <span>01</span>
+          <div>
+            <h3>Clareamento supervisionado</h3>
+            <p>Protocolo seguro, acompanhamento profissional e resultado progressivo.</p>
+          </div>
+        </article>
+        <article>
+          <span>02</span>
+          <div>
+            <h3>Lentes em resina</h3>
+            <p>Planejamento estético para proporção, cor e naturalidade do sorriso.</p>
+          </div>
+        </article>
+        <article>
+          <span>03</span>
+          <div>
+            <h3>Implantes e reabilitação</h3>
+            <p>Tratamentos integrados para função, conforto e segurança ao mastigar.</p>
+          </div>
+        </article>
+      </section>
 
-  <!-- STATS -->
-  <div class="stats-block">
-    <div class="stat-item">
-      <div class="stat-item__num">{{stat_1}}</div>
-      <div class="stat-item__label">{{label_stat_1}}</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-item__num">{{stat_2}}</div>
-      <div class="stat-item__label">{{label_stat_2}}</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-item__num">{{stat_3}}</div>
-      <div class="stat-item__label">{{label_stat_3}}</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-item__num">{{stat_4}}</div>
-      <div class="stat-item__label">{{label_stat_4}}</div>
-    </div>
-  </div>
+      <section class="metrics benefits" aria-label="Beneficios">
+        <article>
+          <strong>12 anos</strong>
+          <span>de atuação clínica</span>
+        </article>
+        <article>
+          <strong>4.9</strong>
+          <span>nas avaliações</span>
+        </article>
+        <article>
+          <strong>+2 mil</strong>
+          <span>pacientes atendidos</span>
+        </article>
+      </section>
 
-  <!-- PROCESSO -->
-  <section class="section section--gray">
-    <p class="section__label">Como funciona</p>
-    <h2 class="section__title">{{titulo_processo}}</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step__dot">1</div>
-        <div>
-          <div class="step__title">{{passo_1}}</div>
-          <div class="step__desc">{{desc_passo_1}}</div>
+      
+
+      <section class="testimonials" aria-labelledby="testimonials-title">
+        <div class="section-heading">
+          <p class="eyebrow">Prova social</p>
+          <h2 id="testimonials-title">Pacientes tranquilos e bem acompanhados.</h2>
         </div>
-      </div>
-      <div class="step">
-        <div class="step__dot">2</div>
-        <div>
-          <div class="step__title">{{passo_2}}</div>
-          <div class="step__desc">{{desc_passo_2}}</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step__dot">3</div>
-        <div>
-          <div class="step__title">{{passo_3}}</div>
-          <div class="step__desc">{{desc_passo_3}}</div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <article>
+          <p>“A Dra. Camila explicou cada etapa e eu me senti segura durante todo o tratamento.”</p>
+          <strong>Ana Ribeiro</strong>
+        </article>
+        <article>
+          <p>“Meu clareamento ficou natural e o atendimento foi impecável do começo ao fim.”</p>
+          <strong>Paulo Mendes</strong>
+        </article>
+      </section>
 
-  <!-- DEPOIMENTO -->
-  <div class="quote-block">
-    <p class="quote-block__text">"{{depoimento}}"</p>
-    <p class="quote-block__author">{{depoimento_autor}}</p>
-    <p class="quote-block__role">{{depoimento_cargo}}</p>
-  </div>
+      <section class="cta-final bottom-cta" aria-label="CTA final">
+        <a href="https://wa.me/5511999999999">Falar com a clínica no WhatsApp</a>
+      </section>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <h2 class="cta-section__title">{{cta_titulo}}</h2>
-    <p class="cta-section__sub">{{cta_sub}}</p>
-    <a href="{{contato_link}}" class="btn-accent" style="display:inline-flex">{{cta_btn}} →</a>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer__brand">{{nome_empresa}}</div>
-    <div class="footer__links">
-      <a href="{{linkedin_link}}">LinkedIn</a>
-      <a href="{{instagram_link}}">Instagram</a>
-      <a href="{{contato_link}}">Contato</a>
-    </div>
-    <p class="footer__copy">{{cidade_estado}} · {{segmento}}</p>
-  </footer>
-
-</body>
+      <footer class="site-footer" aria-label="Rodape">
+        <span>Dra. Camila Odontologia - Odontologia estetica e atendimento humanizado</span>
+      </footer>
+    </main>
+      <script type="application/json" id="dnai-placeholders">
+        {
+          "empresa": "{{empresa}}",
+          "segmento": "{{segmento}}",
+          "dor": "{{dor}}",
+          "produto": "{{produto}}",
+          "cta": "{{cta}}",
+          "cidade": "{{cidade}}"
+        }
+      </script>
+  </body>
 </html>

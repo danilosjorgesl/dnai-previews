@@ -1,0 +1,266 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-06-05",
+  "nichos": {
+    "clinica estetica": {
+      "template": "beauty_luxury",
+      "produto_indicado": "Presenca Inteligente Beauty Luxury"
+    },
+    "spa": {
+      "template": "beauty_luxury",
+      "produto_indicado": "Presenca Inteligente Beauty Luxury"
+    },
+    "salao premium": {
+      "template": "beauty_luxury",
+      "produto_indicado": "Presenca Inteligente Beauty Luxury"
+    },
+    "instituto de beleza": {
+      "template": "beauty_luxury",
+      "produto_indicado": "Presenca Inteligente Beauty Luxury"
+    },
+    "nail designer": {
+      "template": "beauty_luxury",
+      "produto_indicado": "Presenca Inteligente Beauty Luxury"
+    },
+    "salao de beleza": {
+      "template": "beauty_studio",
+      "produto_indicado": "Presenca Inteligente Beauty Studio"
+    },
+    "nail studio": {
+      "template": "beauty_studio",
+      "produto_indicado": "Presenca Inteligente Beauty Studio"
+    },
+    "make artist": {
+      "template": "beauty_studio",
+      "produto_indicado": "Presenca Inteligente Beauty Studio"
+    },
+    "sobrancelhas": {
+      "template": "beauty_studio",
+      "produto_indicado": "Presenca Inteligente Beauty Studio"
+    },
+    "cabeleireiro": {
+      "template": "beauty_studio",
+      "produto_indicado": "Presenca Inteligente Beauty Studio"
+    },
+    "medico": {
+      "template": "authority",
+      "produto_indicado": "Presenca Inteligente Authority"
+    },
+    "odontologia": {
+      "template": "authority",
+      "produto_indicado": "Presenca Inteligente Authority"
+    },
+    "dentista": {
+      "template": "authority",
+      "produto_indicado": "Presenca Inteligente Authority"
+    },
+    "psicologo": {
+      "template": "authority",
+      "produto_indicado": "Presenca Inteligente Authority"
+    },
+    "consultor": {
+      "template": "authority",
+      "produto_indicado": "Presenca Inteligente Authority"
+    },
+    "coach": {
+      "template": "authority",
+      "produto_indicado": "Presenca Inteligente Authority"
+    },
+    "arquiteto": {
+      "template": "authority",
+      "produto_indicado": "Presenca Inteligente Authority"
+    },
+    "advogado": {
+      "template": "business_pro",
+      "produto_indicado": "Presenca Inteligente Business Pro"
+    },
+    "advocacia": {
+      "template": "business_pro",
+      "produto_indicado": "Presenca Inteligente Business Pro"
+    },
+    "agencia": {
+      "template": "business_pro",
+      "produto_indicado": "Presenca Inteligente Business Pro"
+    },
+    "contabilidade": {
+      "template": "business_pro",
+      "produto_indicado": "Presenca Inteligente Business Pro"
+    },
+    "rh": {
+      "template": "business_pro",
+      "produto_indicado": "Presenca Inteligente Business Pro"
+    },
+    "marketing": {
+      "template": "business_pro",
+      "produto_indicado": "Presenca Inteligente Business Pro"
+    },
+    "logistica": {
+      "template": "business_pro",
+      "produto_indicado": "Presenca Inteligente Business Pro"
+    },
+    "restaurante": {
+      "template": "local_hero",
+      "produto_indicado": "Presenca Inteligente Local Hero"
+    },
+    "barbearia": {
+      "template": "local_hero",
+      "produto_indicado": "Presenca Inteligente Local Hero"
+    },
+    "pet shop": {
+      "template": "local_hero",
+      "produto_indicado": "Presenca Inteligente Local Hero"
+    },
+    "farmacia": {
+      "template": "local_hero",
+      "produto_indicado": "Presenca Inteligente Local Hero"
+    },
+    "mercado": {
+      "template": "local_hero",
+      "produto_indicado": "Presenca Inteligente Local Hero"
+    },
+    "academia": {
+      "template": "local_hero",
+      "produto_indicado": "Presenca Inteligente Local Hero"
+    },
+    "eletricista": {
+      "template": "service_pro",
+      "produto_indicado": "Presenca Inteligente Service Pro"
+    },
+    "encanador": {
+      "template": "service_pro",
+      "produto_indicado": "Presenca Inteligente Service Pro"
+    },
+    "pintor": {
+      "template": "service_pro",
+      "produto_indicado": "Presenca Inteligente Service Pro"
+    },
+    "reformas": {
+      "template": "service_pro",
+      "produto_indicado": "Presenca Inteligente Service Pro"
+    },
+    "construcao": {
+      "template": "service_pro",
+      "produto_indicado": "Presenca Inteligente Service Pro"
+    },
+    "oficina": {
+      "template": "auto_pro",
+      "produto_indicado": "Presenca Inteligente Auto Pro"
+    },
+    "mecanica": {
+      "template": "auto_pro",
+      "produto_indicado": "Presenca Inteligente Auto Pro"
+    },
+    "auto eletrica": {
+      "template": "auto_pro",
+      "produto_indicado": "Presenca Inteligente Auto Pro"
+    },
+    "estetica automotiva": {
+      "template": "auto_pro",
+      "produto_indicado": "Presenca Inteligente Auto Pro"
+    },
+    "professor": {
+      "template": "education_pro",
+      "produto_indicado": "Presenca Inteligente Education Pro"
+    },
+    "escola": {
+      "template": "education_pro",
+      "produto_indicado": "Presenca Inteligente Education Pro"
+    },
+    "curso": {
+      "template": "education_pro",
+      "produto_indicado": "Presenca Inteligente Education Pro"
+    },
+    "idiomas": {
+      "template": "education_pro",
+      "produto_indicado": "Presenca Inteligente Education Pro"
+    },
+    "corretor": {
+      "template": "real_estate",
+      "produto_indicado": "Presenca Inteligente Real Estate"
+    },
+    "imobiliaria": {
+      "template": "real_estate",
+      "produto_indicado": "Presenca Inteligente Real Estate"
+    },
+    "construtora": {
+      "template": "real_estate",
+      "produto_indicado": "Presenca Inteligente Real Estate"
+    },
+    "consorcios": {
+      "template": "finance_pro",
+      "produto_indicado": "Presenca Inteligente Finance Pro"
+    },
+    "seguros": {
+      "template": "finance_pro",
+      "produto_indicado": "Presenca Inteligente Finance Pro"
+    },
+    "investimentos": {
+      "template": "finance_pro",
+      "produto_indicado": "Presenca Inteligente Finance Pro"
+    },
+    "credito": {
+      "template": "finance_pro",
+      "produto_indicado": "Presenca Inteligente Finance Pro"
+    },
+    "fotografo": {
+      "template": "event_pro",
+      "produto_indicado": "Presenca Inteligente Event Pro"
+    },
+    "filmagem": {
+      "template": "event_pro",
+      "produto_indicado": "Presenca Inteligente Event Pro"
+    },
+    "buffet": {
+      "template": "event_pro",
+      "produto_indicado": "Presenca Inteligente Event Pro"
+    },
+    "decoracao": {
+      "template": "event_pro",
+      "produto_indicado": "Presenca Inteligente Event Pro"
+    },
+    "dj": {
+      "template": "event_pro",
+      "produto_indicado": "Presenca Inteligente Event Pro"
+    },
+    "turismo": {
+      "template": "travel_pro",
+      "produto_indicado": "Presenca Inteligente Travel Pro"
+    },
+    "excursoes": {
+      "template": "travel_pro",
+      "produto_indicado": "Presenca Inteligente Travel Pro"
+    },
+    "agencia de turismo": {
+      "template": "travel_pro",
+      "produto_indicado": "Presenca Inteligente Travel Pro"
+    },
+    "agropecuaria": {
+      "template": "agro_pro",
+      "produto_indicado": "Presenca Inteligente Agro Pro"
+    },
+    "agronomo": {
+      "template": "agro_pro",
+      "produto_indicado": "Presenca Inteligente Agro Pro"
+    },
+    "maquinas agricolas": {
+      "template": "agro_pro",
+      "produto_indicado": "Presenca Inteligente Agro Pro"
+    },
+    "software house": {
+      "template": "tech_pro",
+      "produto_indicado": "Presenca Inteligente Tech Pro"
+    },
+    "automacao": {
+      "template": "tech_pro",
+      "produto_indicado": "Presenca Inteligente Tech Pro"
+    },
+    "desenvolvimento": {
+      "template": "tech_pro",
+      "produto_indicado": "Presenca Inteligente Tech Pro"
+    },
+    "ti": {
+      "template": "tech_pro",
+      "produto_indicado": "Presenca Inteligente Tech Pro"
+    }
+  }
+}

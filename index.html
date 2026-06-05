@@ -1,676 +1,723 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DemoFactory — dnAi Templates</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* ── Reset + base ─────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0c0c0f;
-      color: #e8e8ec;
-      -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-    }
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>dnAi Templates</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #07080c;
+        --panel: rgba(255, 255, 255, 0.07);
+        --panel-strong: rgba(255, 255, 255, 0.11);
+        --ink: #f7f8fb;
+        --muted: #a8adbb;
+        --soft: #747b8f;
+        --line: rgba(255, 255, 255, 0.12);
+        --cyan: #66e3ff;
+        --lime: #b7ff76;
+        --pink: #ff7ab8;
+        --gold: #ffd36e;
+        --shadow: 0 30px 90px rgba(0, 0, 0, 0.48);
+      }
 
-    /* ── Header ───────────────────────── */
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 200;
-      background: rgba(12,12,15,.85);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      padding: 0 24px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+      * {
+        box-sizing: border-box;
+      }
 
-    .header__brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+      html {
+        min-height: 100%;
+        background: var(--bg);
+      }
 
-    .header__logo {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 800;
-      color: #fff;
-    }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        letter-spacing: 0;
+        background:
+          radial-gradient(circle at 18% 8%, rgba(102, 227, 255, 0.18), transparent 32%),
+          radial-gradient(circle at 86% 18%, rgba(255, 122, 184, 0.16), transparent 30%),
+          linear-gradient(135deg, #080910 0%, #121018 42%, #090b0f 100%);
+      }
 
-    .header__name {
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-    }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-    .header__sub {
-      font-size: 11px;
-      color: rgba(255,255,255,.3);
-      margin-left: 4px;
-    }
+      .shell {
+        width: min(100%, 1480px);
+        margin: 0 auto;
+        padding: 34px 28px 46px;
+      }
 
-    .header__pill {
-      background: rgba(99,102,241,.15);
-      border: 1px solid rgba(99,102,241,.3);
-      color: #a5b4fc;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .08em;
-      padding: 4px 10px;
-      border-radius: 999px;
-    }
+      .top {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 28px;
+        align-items: end;
+        margin-bottom: 26px;
+      }
 
-    /* ── Hero da vitrine ──────────────── */
-    .vitrine-hero {
-      padding: 64px 24px 56px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
 
-    .vitrine-hero::before {
-      content: '';
-      position: absolute;
-      top: -120px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 400px;
-      background: radial-gradient(ellipse, rgba(99,102,241,.15) 0%, transparent 70%);
-      pointer-events: none;
-    }
+      .mark {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border: 1px solid rgba(102, 227, 255, 0.32);
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(102, 227, 255, 0.2), rgba(183, 255, 118, 0.12));
+        color: var(--cyan);
+        font-weight: 950;
+      }
 
-    .vitrine-hero__eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: #a5b4fc;
-      margin-bottom: 16px;
-    }
+      .brand span {
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+      }
 
-    .vitrine-hero__title {
-      font-size: clamp(32px, 8vw, 56px);
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.05;
-      letter-spacing: -.03em;
-      margin-bottom: 14px;
-    }
+      h1,
+      h2,
+      p {
+        margin-top: 0;
+      }
 
-    .vitrine-hero__title span {
-      background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+      h1 {
+        max-width: 900px;
+        margin-bottom: 12px;
+        font-size: clamp(2.4rem, 5vw, 5.4rem);
+        line-height: 0.92;
+        font-weight: 950;
+      }
 
-    .vitrine-hero__sub {
-      font-size: 15px;
-      color: rgba(255,255,255,.4);
-      max-width: 440px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
+      .intro {
+        max-width: 680px;
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.55;
+      }
 
-    /* ── Filtros ──────────────────────── */
-    .filters {
-      padding: 0 24px 32px;
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .filters::-webkit-scrollbar { display: none; }
+      .badge {
+        display: inline-grid;
+        gap: 6px;
+        min-width: 210px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.06);
+        box-shadow: var(--shadow);
+      }
 
-    .filter-btn {
-      flex-shrink: 0;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
-      color: rgba(255,255,255,.5);
-      font-size: 12px;
-      font-weight: 500;
-      padding: 7px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: all .2s;
-      white-space: nowrap;
-    }
+      .badge strong {
+        color: var(--lime);
+        font-size: 2rem;
+        line-height: 1;
+      }
 
-    .filter-btn.active,
-    .filter-btn:hover {
-      background: rgba(99,102,241,.15);
-      border-color: rgba(99,102,241,.4);
-      color: #a5b4fc;
-    }
+      .badge span {
+        color: var(--muted);
+        font-size: 0.86rem;
+        line-height: 1.35;
+      }
 
-    /* ── Grid de templates ────────────── */
-    .templates-grid {
-      padding: 0 16px 80px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(210px, 1fr));
+        gap: 18px;
+        align-items: stretch;
+      }
 
-    @media (min-width: 640px) {
-      .templates-grid { grid-template-columns: 1fr 1fr; padding: 0 24px 80px; }
-    }
+      .card {
+        position: relative;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        min-height: 690px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background:
+          linear-gradient(180deg, var(--panel-strong), rgba(255, 255, 255, 0.045)),
+          #101117;
+        box-shadow: 0 22px 62px rgba(0, 0, 0, 0.35);
+      }
 
-    @media (min-width: 1024px) {
-      .templates-grid { grid-template-columns: repeat(3, 1fr); }
-    }
+      .card::before {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        content: "";
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 34%);
+        opacity: 0.75;
+      }
 
-    /* ── Card template ────────────────── */
-    .tpl-card {
-      background: #16161b;
-      border: 1px solid rgba(255,255,255,.07);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: transform .25s cubic-bezier(.34,1.56,.64,1),
-                  box-shadow .25s ease,
-                  border-color .25s ease;
-      cursor: pointer;
-    }
+      .card-head {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 7px;
+        padding: 18px 18px 14px;
+      }
 
-    .tpl-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0,0,0,.4);
-      border-color: rgba(99,102,241,.3);
-    }
+      .card-head span {
+        color: var(--soft);
+        font-size: 0.75rem;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
 
-    /* Área de preview */
-    .tpl-card__preview {
-      position: relative;
-      background: #1a1a20;
-      aspect-ratio: 9/16;
-      overflow: hidden;
-    }
+      .card-head h2 {
+        margin-bottom: 0;
+        color: var(--ink);
+        font-size: 1.22rem;
+        line-height: 1.05;
+      }
 
-    /* Barra de "browser" decorativa */
-    .tpl-card__preview::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 28px;
-      background: rgba(0,0,0,.4);
-      backdrop-filter: blur(4px);
-      z-index: 10;
-    }
+      .mockup-wrap {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: start center;
+        min-height: 514px;
+        padding: 0 16px 12px;
+      }
 
-    .tpl-card__preview::after {
-      content: '● ● ●';
-      position: absolute;
-      top: 7px;
-      left: 10px;
-      font-size: 8px;
-      color: rgba(255,255,255,.2);
-      letter-spacing: 3px;
-      z-index: 11;
-    }
+      .phone {
+        position: relative;
+        width: 232px;
+        height: 502px;
+        padding: 10px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 34px;
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.23), rgba(255, 255, 255, 0.04)),
+          #07080c;
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+          0 28px 52px rgba(0, 0, 0, 0.42);
+      }
 
-    .tpl-card__iframe-wrap {
-      position: absolute;
-      top: 28px;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      overflow: hidden;
-    }
+      .phone::before {
+        position: absolute;
+        top: 7px;
+        left: 50%;
+        z-index: 3;
+        width: 72px;
+        height: 18px;
+        border-radius: 999px;
+        background: #05060a;
+        content: "";
+        transform: translateX(-50%);
+      }
 
-    .tpl-card__iframe-wrap iframe {
-      width: 390px;
-      height: calc((100% / 0.844) + 0px);
-      border: none;
-      transform-origin: top left;
-      pointer-events: none;
-    }
+      .screen {
+        position: relative;
+        isolation: isolate;
+        width: 212px;
+        height: 482px;
+        overflow: hidden;
+        border-radius: 30px;
+        background: #05060a;
+        clip-path: inset(0 round 30px);
+        contain: paint;
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+      }
 
-    /* Badge de categoria */
-    .tpl-card__badge {
-      position: absolute;
-      bottom: 12px;
-      left: 12px;
-      z-index: 10;
-      display: flex;
-      gap: 5px;
-    }
+      iframe {
+        display: block;
+        width: 390px;
+        height: 844px;
+        border: 0;
+        border-radius: 56px;
+        background: #fff;
+        clip-path: inset(0 round 56px);
+        overflow: hidden;
+        pointer-events: none;
+        transform: scale(0.5435);
+        transform-origin: 0 0;
+      }
 
-    .tpl-badge {
-      background: rgba(0,0,0,.7);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,.12);
-      color: rgba(255,255,255,.8);
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 999px;
-    }
+      .card-foot {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 14px;
+        padding: 0 18px 18px;
+      }
 
-    .tpl-badge--accent {
-      background: rgba(99,102,241,.3);
-      border-color: rgba(99,102,241,.5);
-      color: #a5b4fc;
-    }
+      .meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 0.87rem;
+      }
 
-    /* Área de info */
-    .tpl-card__info {
-      padding: 18px 20px 20px;
-      border-top: 1px solid rgba(255,255,255,.05);
-    }
+      .dot {
+        width: 8px;
+        height: 8px;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        background: var(--cyan);
+        box-shadow: 0 0 20px var(--cyan);
+      }
 
-    .tpl-card__header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 6px;
-    }
+      .open {
+        display: inline-flex;
+        min-height: 46px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        background: linear-gradient(135deg, #f8f8ff, #b9f6ff);
+        color: #06070b;
+        font-size: 0.92rem;
+        font-weight: 950;
+        box-shadow: 0 16px 32px rgba(102, 227, 255, 0.18);
+      }
 
-    .tpl-card__name {
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-    }
+      .card:nth-child(2) .dot {
+        background: var(--pink);
+        box-shadow: 0 0 20px var(--pink);
+      }
 
-    .tpl-card__status {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #22c55e;
-      margin-top: 5px;
-      box-shadow: 0 0 6px rgba(34,197,94,.5);
-    }
+      .card:nth-child(3) .dot {
+        background: var(--lime);
+        box-shadow: 0 0 20px var(--lime);
+      }
 
-    .tpl-card__desc {
-      font-size: 12px;
-      color: rgba(255,255,255,.35);
-      line-height: 1.5;
-      margin-bottom: 14px;
-    }
+      .card:nth-child(4) .dot {
+        background: var(--gold);
+        box-shadow: 0 0 20px var(--gold);
+      }
 
-    .tpl-card__tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-bottom: 16px;
-    }
+      .card:nth-child(5) .dot {
+        background: #ff6d5e;
+        box-shadow: 0 0 20px #ff6d5e;
+      }
 
-    .tpl-tag {
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.06);
-      color: rgba(255,255,255,.3);
-      font-size: 10px;
-      font-weight: 500;
-      padding: 3px 8px;
-      border-radius: 999px;
-    }
+      @media (max-width: 1240px) {
+        .grid {
+          grid-template-columns: repeat(3, minmax(240px, 1fr));
+        }
+      }
 
-    .tpl-card__actions {
-      display: flex;
-      gap: 8px;
-    }
+      @media (max-width: 860px) {
+        .shell {
+          padding: 26px 18px 34px;
+        }
 
-    .tpl-btn {
-      flex: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      padding: 9px 12px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      transition: all .2s;
-      text-decoration: none;
-    }
+        .top {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
 
-    .tpl-btn--primary {
-      background: rgba(99,102,241,.2);
-      border: 1px solid rgba(99,102,241,.35);
-      color: #a5b4fc;
-    }
-    .tpl-btn--primary:hover {
-      background: rgba(99,102,241,.35);
-      border-color: rgba(99,102,241,.6);
-      color: #c7d2fe;
-    }
+        .badge {
+          min-width: 0;
+          width: 100%;
+        }
 
-    .tpl-btn--ghost {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.07);
-      color: rgba(255,255,255,.35);
-    }
-    .tpl-btn--ghost:hover {
-      background: rgba(255,255,255,.08);
-      color: rgba(255,255,255,.6);
-    }
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
+        }
 
-    /* ── Seção de stats ───────────────── */
-    .vitrine-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(255,255,255,.04);
-      border-top: 1px solid rgba(255,255,255,.04);
-      border-bottom: 1px solid rgba(255,255,255,.04);
-      margin-bottom: 40px;
-    }
+        .card {
+          min-height: 620px;
+        }
 
-    .vitrine-stat {
-      background: #0c0c0f;
-      padding: 24px 16px;
-      text-align: center;
-    }
+        .mockup-wrap {
+          min-height: 450px;
+          padding-inline: 12px;
+        }
 
-    .vitrine-stat__num {
-      font-size: 28px;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
+        .phone {
+          width: 204px;
+          height: 442px;
+          border-radius: 31px;
+        }
 
-    .vitrine-stat__label {
-      font-size: 10px;
-      font-weight: 500;
-      color: rgba(255,255,255,.25);
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
+        .screen {
+          width: 184px;
+          height: 422px;
+          border-radius: 27px;
+          clip-path: inset(0 round 27px);
+        }
 
-    /* ── Footer ───────────────────────── */
-    .footer {
-      background: #090909;
-      border-top: 1px solid rgba(255,255,255,.04);
-      padding: 32px 24px;
-      text-align: center;
-    }
+        iframe {
+          transform: scale(0.4718);
+        }
+      }
 
-    .footer__logo {
-      font-size: 14px;
-      font-weight: 700;
-      color: rgba(255,255,255,.2);
-      margin-bottom: 8px;
-    }
+      @media (max-width: 560px) {
+        .shell {
+          padding: 22px 14px 30px;
+        }
 
-    .footer__copy {
-      font-size: 11px;
-      color: rgba(255,255,255,.1);
-    }
+        h1 {
+          font-size: 2.45rem;
+        }
 
-    /* ── Utilitários ──────────────────── */
-    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
-  </style>
-</head>
-<body>
+        .intro {
+          font-size: 0.98rem;
+        }
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header__brand">
-      <div class="header__logo">df</div>
-      <div>
-        <span class="header__name">DemoFactory</span>
-        <span class="header__sub">dnAi</span>
-      </div>
-    </div>
-    <span class="header__pill">Laboratório interno</span>
-  </header>
+        .grid {
+          grid-template-columns: 1fr;
+        }
 
-  <!-- HERO VITRINE -->
-  <section class="vitrine-hero">
-    <div class="vitrine-hero__eyebrow">⚡ Templates reutilizáveis</div>
-    <h1 class="vitrine-hero__title">
-      Presença digital<br>
-      <span>inteligente</span>
-    </h1>
-    <p class="vitrine-hero__sub">
-      Laboratório visual da dnAi. Templates prontos para integração
-      com o Diagnóstico em <code style="color:#6366f1;font-size:13px">/preview/{token}</code>.
-    </p>
-  </section>
+        .card {
+          min-height: auto;
+        }
 
-  <!-- STATS -->
-  <div class="vitrine-stats">
-    <div class="vitrine-stat">
-      <div class="vitrine-stat__num">5</div>
-      <div class="vitrine-stat__label">Templates</div>
-    </div>
-    <div class="vitrine-stat">
-      <div class="vitrine-stat__num">∞</div>
-      <div class="vitrine-stat__label">Variáveis</div>
-    </div>
-    <div class="vitrine-stat">
-      <div class="vitrine-stat__num">v1</div>
-      <div class="vitrine-stat__label">Versão</div>
-    </div>
-  </div>
+        .mockup-wrap {
+          min-height: 514px;
+        }
 
-  <!-- FILTROS -->
-  <div class="filters">
-    <button class="filter-btn active" data-filter="all">Todos</button>
-    <button class="filter-btn" data-filter="beleza">Beleza</button>
-    <button class="filter-btn" data-filter="autoridade">Autoridade</button>
-    <button class="filter-btn" data-filter="empresas">Empresas</button>
-    <button class="filter-btn" data-filter="local">Negócios locais</button>
-  </div>
+        .phone {
+          width: 232px;
+          height: 502px;
+        }
 
-  <!-- GRID DE TEMPLATES -->
-  <main class="templates-grid" id="grid">
+        .screen {
+          width: 212px;
+          height: 482px;
+          border-radius: 30px;
+          clip-path: inset(0 round 30px);
+        }
 
-    <!-- Beauty Luxury -->
-    <div class="tpl-card" data-cat="beleza">
-      <div class="tpl-card__preview">
-        <div class="tpl-card__iframe-wrap">
-          <iframe src="templates/beauty_luxury/index.html" title="Beauty Luxury preview" loading="lazy" id="iframe-beauty-luxury"></iframe>
+        iframe {
+          transform: scale(0.5435);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="top" aria-label="Vitrine dnAi">
+        <div>
+          <div class="brand">
+            <div class="mark">dn</div>
+            <span>dnAi template showroom</span>
+          </div>
+          <h1>Vitrine premium para previews comerciais.</h1>
+          <p class="intro">Quatorze experiencias prontas para abrir, comparar e apresentar em mockups de celular com acabamento escuro, limpo e alinhado.</p>
         </div>
-        <div class="tpl-card__badge">
-          <span class="tpl-badge tpl-badge--accent">Luxury</span>
-          <span class="tpl-badge">Dark</span>
+        <div class="badge" aria-label="Resumo da vitrine">
+          <strong>14</strong>
+          <span>templates mobile-first prontos para apresentacao</span>
         </div>
-      </div>
-      <div class="tpl-card__info">
-        <div class="tpl-card__header">
-          <div class="tpl-card__name">Beauty Luxury</div>
-          <div class="tpl-card__status"></div>
-        </div>
-        <p class="tpl-card__desc">Estética premium. Paleta escura com dourado, tipografia serif elegante e atmosfera sensorial.</p>
-        <div class="tpl-card__tags">
-          <span class="tpl-tag">Clínica Estética</span>
-          <span class="tpl-tag">Spa</span>
-          <span class="tpl-tag">Instituto</span>
-        </div>
-        <div class="tpl-card__actions">
-          <a href="templates/beauty_luxury/index.html" target="_blank" class="tpl-btn tpl-btn--primary">↗ Abrir</a>
-          <button class="tpl-btn tpl-btn--ghost" onclick="copyPath('templates/beauty_luxury/index.html')">⎘ Path</button>
-        </div>
-      </div>
-    </div>
+      </section>
 
-    <!-- Beauty Studio -->
-    <div class="tpl-card" data-cat="beleza">
-      <div class="tpl-card__preview">
-        <div class="tpl-card__iframe-wrap">
-          <iframe src="templates/beauty_studio/index.html" title="Beauty Studio preview" loading="lazy"></iframe>
-        </div>
-        <div class="tpl-card__badge">
-          <span class="tpl-badge tpl-badge--accent">Studio</span>
-          <span class="tpl-badge">Rose</span>
-        </div>
-      </div>
-      <div class="tpl-card__info">
-        <div class="tpl-card__header">
-          <div class="tpl-card__name">Beauty Studio</div>
-          <div class="tpl-card__status"></div>
-        </div>
-        <p class="tpl-card__desc">Salão e studio modernos. Paleta rose/blush, layout energético com cards e galeria.</p>
-        <div class="tpl-card__tags">
-          <span class="tpl-tag">Salão</span>
-          <span class="tpl-tag">Nail Studio</span>
-          <span class="tpl-tag">Make</span>
-        </div>
-        <div class="tpl-card__actions">
-          <a href="templates/beauty_studio/index.html" target="_blank" class="tpl-btn tpl-btn--primary">↗ Abrir</a>
-          <button class="tpl-btn tpl-btn--ghost" onclick="copyPath('templates/beauty_studio/index.html')">⎘ Path</button>
-        </div>
-      </div>
-    </div>
+      <section class="grid" aria-label="Templates disponiveis">
+        <article class="card">
+          <div class="card-head">
+            <span>Beauty premium</span>
+            <h2>Laura Nail Designer</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/beauty_luxury/index.html" title="Preview Laura Nail Designer" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: unhas de luxo</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/beauty_luxury/index.html">Abrir template</a>
+          </div>
+        </article>
 
-    <!-- Authority -->
-    <div class="tpl-card" data-cat="autoridade">
-      <div class="tpl-card__preview">
-        <div class="tpl-card__iframe-wrap">
-          <iframe src="templates/authority/index.html" title="Authority preview" loading="lazy"></iframe>
-        </div>
-        <div class="tpl-card__badge">
-          <span class="tpl-badge tpl-badge--accent">Authority</span>
-          <span class="tpl-badge">Blue</span>
-        </div>
-      </div>
-      <div class="tpl-card__info">
-        <div class="tpl-card__header">
-          <div class="tpl-card__name">Authority</div>
-          <div class="tpl-card__status"></div>
-        </div>
-        <p class="tpl-card__desc">Profissional liberal e especialista. Tipografia bold, layout editorial tech, foco em credibilidade.</p>
-        <div class="tpl-card__tags">
-          <span class="tpl-tag">Médico</span>
-          <span class="tpl-tag">Advogado</span>
-          <span class="tpl-tag">Consultor</span>
-        </div>
-        <div class="tpl-card__actions">
-          <a href="templates/authority/index.html" target="_blank" class="tpl-btn tpl-btn--primary">↗ Abrir</a>
-          <button class="tpl-btn tpl-btn--ghost" onclick="copyPath('templates/authority/index.html')">⎘ Path</button>
-        </div>
-      </div>
-    </div>
+        <article class="card">
+          <div class="card-head">
+            <span>Beauty studio</span>
+            <h2>Bella Studio</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/beauty_studio/index.html" title="Preview Bella Studio" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: salao de beleza</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/beauty_studio/index.html">Abrir template</a>
+          </div>
+        </article>
 
-    <!-- Business Pro -->
-    <div class="tpl-card" data-cat="empresas">
-      <div class="tpl-card__preview">
-        <div class="tpl-card__iframe-wrap">
-          <iframe src="templates/business_pro/index.html" title="Business Pro preview" loading="lazy"></iframe>
-        </div>
-        <div class="tpl-card__badge">
-          <span class="tpl-badge tpl-badge--accent">B2B</span>
-          <span class="tpl-badge">Indigo</span>
-        </div>
-      </div>
-      <div class="tpl-card__info">
-        <div class="tpl-card__header">
-          <div class="tpl-card__name">Business Pro</div>
-          <div class="tpl-card__status"></div>
-        </div>
-        <p class="tpl-card__desc">Empresa e serviços corporativos. Gradiente azul/índigo, layout inspirado em SaaS.</p>
-        <div class="tpl-card__tags">
-          <span class="tpl-tag">Agência</span>
-          <span class="tpl-tag">Tech</span>
-          <span class="tpl-tag">Contabilidade</span>
-        </div>
-        <div class="tpl-card__actions">
-          <a href="templates/business_pro/index.html" target="_blank" class="tpl-btn tpl-btn--primary">↗ Abrir</a>
-          <button class="tpl-btn tpl-btn--ghost" onclick="copyPath('templates/business_pro/index.html')">⎘ Path</button>
-        </div>
-      </div>
-    </div>
+        <article class="card">
+          <div class="card-head">
+            <span>Authority</span>
+            <h2>Dra. Camila Odontologia</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/authority/index.html" title="Preview Dra. Camila Odontologia" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: clinica odontologica</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/authority/index.html">Abrir template</a>
+          </div>
+        </article>
 
-    <!-- Local Hero -->
-    <div class="tpl-card" data-cat="local">
-      <div class="tpl-card__preview">
-        <div class="tpl-card__iframe-wrap">
-          <iframe src="templates/local_hero/index.html" title="Local Hero preview" loading="lazy"></iframe>
-        </div>
-        <div class="tpl-card__badge">
-          <span class="tpl-badge tpl-badge--accent">Local</span>
-          <span class="tpl-badge">Custom color</span>
-        </div>
-      </div>
-      <div class="tpl-card__info">
-        <div class="tpl-card__header">
-          <div class="tpl-card__name">Local Hero</div>
-          <div class="tpl-card__status"></div>
-        </div>
-        <p class="tpl-card__desc">Negócio local, máxima conversão. CTA flutuante, avaliações Google, cor de marca configurável.</p>
-        <div class="tpl-card__tags">
-          <span class="tpl-tag">Restaurante</span>
-          <span class="tpl-tag">Pet Shop</span>
-          <span class="tpl-tag">Oficina</span>
-        </div>
-        <div class="tpl-card__actions">
-          <a href="templates/local_hero/index.html" target="_blank" class="tpl-btn tpl-btn--primary">↗ Abrir</a>
-          <button class="tpl-btn tpl-btn--ghost" onclick="copyPath('templates/local_hero/index.html')">⎘ Path</button>
-        </div>
-      </div>
-    </div>
+        <article class="card">
+          <div class="card-head">
+            <span>Business pro</span>
+            <h2>Marcos Silva Advocacia</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/business_pro/index.html" title="Preview Marcos Silva Advocacia" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: advocacia consultiva</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/business_pro/index.html">Abrir template</a>
+          </div>
+        </article>
 
-  </main>
+        <article class="card">
+          <div class="card-head">
+            <span>Local hero</span>
+            <h2>Barbearia Rock</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/local_hero/index.html" title="Preview Barbearia Rock" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: barbearia local</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/local_hero/index.html">Abrir template</a>
+          </div>
+        </article>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer__logo">DemoFactory · dnAi</div>
-    <p class="footer__copy">Uso interno · Integrar via /preview/{token} no Diagnóstico dnAi</p>
-  </footer>
+        <article class="card">
+          <div class="card-head">
+            <span>Service pro</span>
+            <h2>Pronto Service</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/service_pro/index.html" title="Preview Pronto Service" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: servicos e reparos</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/service_pro/index.html">Abrir template</a>
+          </div>
+        </article>
 
-  <script>
-    /* ── Escala dinâmica dos iframes ─── */
-    function scaleIframes() {
-      document.querySelectorAll('.tpl-card__iframe-wrap').forEach(wrap => {
-        const iframe = wrap.querySelector('iframe');
-        if (!iframe) return;
-        const scale = wrap.offsetWidth / 390;
-        iframe.style.transform = `scale(${scale})`;
-        iframe.style.height = (wrap.offsetHeight / scale) + 'px';
-      });
-    }
+        <article class="card">
+          <div class="card-head">
+            <span>Auto pro</span>
+            <h2>Prime Auto Center</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/auto_pro/index.html" title="Preview Prime Auto Center" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: oficina automotiva</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/auto_pro/index.html">Abrir template</a>
+          </div>
+        </article>
 
-    const ro = new ResizeObserver(scaleIframes);
-    document.querySelectorAll('.tpl-card__iframe-wrap').forEach(el => ro.observe(el));
-    scaleIframes();
+        <article class="card">
+          <div class="card-head">
+            <span>Education pro</span>
+            <h2>Metodo Avancar</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/education_pro/index.html" title="Preview Metodo Avancar" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: escola e cursos</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/education_pro/index.html">Abrir template</a>
+          </div>
+        </article>
 
-    /* ── Filtros ─────────────────────── */
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+        <article class="card">
+          <div class="card-head">
+            <span>Real estate</span>
+            <h2>Vista Prime Imoveis</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/real_estate/index.html" title="Preview Vista Prime Imoveis" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: imoveis e corretor</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/real_estate/index.html">Abrir template</a>
+          </div>
+        </article>
 
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.tpl-card').forEach(card => {
-          const show = filter === 'all' || card.dataset.cat === filter;
-          card.style.display = show ? '' : 'none';
-        });
-      });
-    });
+        <article class="card">
+          <div class="card-head">
+            <span>Finance pro</span>
+            <h2>Norte Capital</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/finance_pro/index.html" title="Preview Norte Capital" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: financeiro e seguros</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/finance_pro/index.html">Abrir template</a>
+          </div>
+        </article>
 
-    /* ── Copiar path ─────────────────── */
-    function copyPath(path) {
-      navigator.clipboard.writeText(path).then(() => {
-        const btn = event.target;
-        const original = btn.textContent;
-        btn.textContent = '✓ Copiado';
-        setTimeout(() => btn.textContent = original, 1500);
-      });
-    }
-  </script>
+        <article class="card">
+          <div class="card-head">
+            <span>Event pro</span>
+            <h2>Viva Eventos</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/event_pro/index.html" title="Preview Viva Eventos" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: eventos e festa</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/event_pro/index.html">Abrir template</a>
+          </div>
+        </article>
 
-</body>
+        <article class="card">
+          <div class="card-head">
+            <span>Travel pro</span>
+            <h2>Rota Viva Turismo</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/travel_pro/index.html" title="Preview Rota Viva Turismo" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: turismo e agencia</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/travel_pro/index.html">Abrir template</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <span>Agro pro</span>
+            <h2>Campo Forte Agro</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/agro_pro/index.html" title="Preview Campo Forte Agro" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: agro e maquinas</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/agro_pro/index.html">Abrir template</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <span>Tech pro</span>
+            <h2>Nexo Tech Studio</h2>
+          </div>
+          <div class="mockup-wrap">
+            <div class="phone" aria-hidden="true">
+              <div class="screen">
+                <iframe src="templates/tech_pro/index.html" title="Preview Nexo Tech Studio" loading="lazy" scrolling="no"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <div class="meta">
+              <span>Nicho: software e TI</span>
+              <i class="dot" aria-hidden="true"></i>
+            </div>
+            <a class="open" href="templates/tech_pro/index.html">Abrir template</a>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
 </html>
