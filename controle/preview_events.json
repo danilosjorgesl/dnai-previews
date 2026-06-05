@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "events": [
+    {
+      "lead_id": "001",
+      "data": "2026-06-05",
+      "hora": "12:17:54",
+      "evento": "preview_open"
+    },
+    {
+      "lead_id": "001",
+      "data": "2026-06-05",
+      "hora": "12:17:54",
+      "evento": "whatsapp_click"
+    }
+  ]
+}

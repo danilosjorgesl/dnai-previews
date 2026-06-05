@@ -1,4 +1,23 @@
 {
   "version": "1.1.0",
-  "tokens": []
+  "tokens": [
+    {
+      "preview_token": "ae52ba7023d1c6abd6b24f0532155e2c",
+      "nome_empresa": "Bela Rosa",
+      "slug": "bela-rosa",
+      "template": "beauty_luxury",
+      "lead_id": "001",
+      "status": "novo",
+      "created_at": "2026-06-05T15:17:54.049Z",
+      "updated_at": "2026-06-05T15:17:54.050Z",
+      "dados": {
+        "empresa": "Bela Rosa",
+        "segmento": "beleza",
+        "dor": "sem agenda online",
+        "produto": "Presença Inteligente dnAi",
+        "cta": "Falar no WhatsApp",
+        "cidade": ""
+      }
+    }
+  ]
 }

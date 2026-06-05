@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "leads": [
+    {
+      "lead_id": "001",
+      "nome_empresa": "Bela Rosa",
+      "segmento": "beleza",
+      "dor_principal": "sem agenda online",
+      "produto_indicado": "Presença Inteligente dnAi",
+      "template_indicado": "beauty_luxury",
+      "preview_slug": "bela-rosa",
+      "preview_token": "ae52ba7023d1c6abd6b24f0532155e2c",
+      "status": "chamou_whatsapp",
+      "criado_em": "2026-06-05T12:17:54"
+    }
+  ]
+}

@@ -4,6 +4,11 @@ const path = require("node:path");
 
 const DEFAULT_STORE = path.resolve(__dirname, "controle", "preview_tokens.json");
 const UNIVERSAL_FIELDS = ["empresa", "segmento", "dor", "produto", "cta", "cidade"];
+const PREVIEW_STATUSES = ["novo", "visualizou", "chamou_whatsapp", "proposta_enviada", "fechado"];
+const STATUS_RANK = PREVIEW_STATUSES.reduce((map, status, index) => {
+  map[status] = index;
+  return map;
+}, {});
 
 function assertTemplateName(template) {
   if (typeof template !== "string" || !/^[a-z0-9_]+$/.test(template)) {
@@ -100,6 +105,28 @@ function buildLegacyPreviewUrl(previewToken) {
   return `/preview/${previewToken}`;
 }
 
+function assertPreviewStatus(status) {
+  if (!PREVIEW_STATUSES.includes(status)) {
+    throw new Error("Status de preview invalido.");
+  }
+}
+
+function normalizeStatus(status) {
+  return PREVIEW_STATUSES.includes(status) ? status : "novo";
+}
+
+function previewUrlFromRecord(record) {
+  return record.slug ? buildPreviewUrl(record.slug) : buildLegacyPreviewUrl(record.preview_token);
+}
+
+function normalizePreviewRecord(record) {
+  return {
+    ...record,
+    status: normalizeStatus(record.status),
+    preview_url: previewUrlFromRecord(record)
+  };
+}
+
 function generateUniqueSlug(nomeEmpresa, store, currentPreviewToken = null) {
   const baseSlug = slugify(nomeEmpresa);
   let slug = baseSlug;
@@ -169,6 +196,9 @@ function createPreviewToken(input, options = {}) {
     slug,
     template,
     lead_id: String(leadId),
+    status: "novo",
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
     dados: normalizeDados(input)
   };
 
@@ -189,10 +219,7 @@ function getPreviewToken(previewToken, options = {}) {
     throw new Error("Preview token nao encontrado.");
   }
 
-  return {
-    ...record,
-    preview_url: record.slug ? buildPreviewUrl(record.slug) : buildLegacyPreviewUrl(record.preview_token)
-  };
+  return normalizePreviewRecord(record);
 }
 
 function getPreviewSlug(slug, options = {}) {
@@ -203,10 +230,7 @@ function getPreviewSlug(slug, options = {}) {
     throw new Error("Preview slug nao encontrado.");
   }
 
-  return {
-    ...record,
-    preview_url: buildPreviewUrl(record.slug)
-  };
+  return normalizePreviewRecord(record);
 }
 
 function resolvePreview(input, options = {}) {
@@ -217,19 +241,63 @@ function resolvePreview(input, options = {}) {
     throw new Error("Preview nao encontrado.");
   }
 
-  return {
-    ...record,
-    preview_url: record.slug ? buildPreviewUrl(record.slug) : buildLegacyPreviewUrl(record.preview_token)
-  };
+  return normalizePreviewRecord(record);
 }
 
 function listPreviewTokens(options = {}) {
   const store = loadStore(options.storePath || DEFAULT_STORE);
 
-  return store.tokens.map((record) => ({
-    ...record,
-    preview_url: record.slug ? buildPreviewUrl(record.slug) : buildLegacyPreviewUrl(record.preview_token)
-  }));
+  return store.tokens.map(normalizePreviewRecord);
+}
+
+function listPreviewPanelRows(options = {}) {
+  return listPreviewTokens(options).map((record) => {
+    const dados = record.dados && typeof record.dados === "object" ? record.dados : {};
+
+    return {
+      empresa: dados.empresa || record.nome_empresa || "",
+      segmento: dados.segmento || record.segmento || record.nicho || "",
+      produto: dados.produto || record.produto || record.produto_indicado || "",
+      template: record.template || "",
+      slug: record.slug || "",
+      url_publica: record.preview_url,
+      status: normalizeStatus(record.status),
+      preview_token: record.preview_token,
+      lead_id: record.lead_id || ""
+    };
+  });
+}
+
+function updatePreviewStatus(input, status, options = {}) {
+  assertPreviewStatus(status);
+
+  const storePath = options.storePath || DEFAULT_STORE;
+  const store = loadStore(storePath);
+  const index = store.tokens.findIndex((record) => record.slug === input || record.preview_token === input);
+
+  if (index < 0) {
+    throw new Error("Preview nao encontrado.");
+  }
+
+  const currentStatus = normalizeStatus(store.tokens[index].status);
+  const shouldAdvanceOnly = options.onlyAdvance !== false;
+  const nextStatus = shouldAdvanceOnly && STATUS_RANK[status] < STATUS_RANK[currentStatus]
+    ? currentStatus
+    : status;
+
+  store.tokens[index] = {
+    ...store.tokens[index],
+    status: nextStatus,
+    updated_at: new Date().toISOString()
+  };
+
+  saveStore(store, storePath);
+
+  return normalizePreviewRecord(store.tokens[index]);
+}
+
+function markPreviewVisualized(input, options = {}) {
+  return updatePreviewStatus(input, "visualizou", { ...options, onlyAdvance: true });
 }
 
 function runCli() {
@@ -265,7 +333,19 @@ function runCli() {
     return;
   }
 
-  throw new Error("Comando invalido. Use: create <template> <lead_id> <nome_empresa>, get <token>, slug <slug>, resolve <token_ou_slug> ou list.");
+  if (command === "panel") {
+    const result = listPreviewPanelRows();
+    process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+    return;
+  }
+
+  if (command === "status") {
+    const result = updatePreviewStatus(arg1, arg2, { onlyAdvance: false });
+    process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+    return;
+  }
+
+  throw new Error("Comando invalido. Use: create <template> <lead_id> <nome_empresa>, get <token>, slug <slug>, resolve <token_ou_slug>, list, panel ou status <token_ou_slug> <status>.");
 }
 
 if (require.main === module) {
@@ -285,11 +365,17 @@ module.exports = {
   generateUniqueSlug,
   getPreviewSlug,
   getPreviewToken,
+  listPreviewPanelRows,
   listPreviewTokens,
   loadStore,
+  markPreviewVisualized,
   normalizeDados,
+  normalizePreviewRecord,
+  normalizeStatus,
+  PREVIEW_STATUSES,
   resolvePreview,
   slugify,
   templateExists,
+  updatePreviewStatus,
   UNIVERSAL_FIELDS
 };
